@@ -67,3 +67,51 @@ print(img);
 
 
 
+//Write a function named setBlack that has one parameter pixel (representing a single pixel) and returns pixel
+//with its red, green, and blue components changed so that the pixel’s color is black.
+
+//Now you will write another function named addBorder. This function will add a black border to an image, such
+//as in the following example:
+
+//On the left, we have the original image, and on the right, we have modified the image by giving it a black border
+//that is 10 pixels thick. Note that the image size of the image with the border is the same as the original image
+//because the border is not added around the outside of the original image, instead it covers up some of the
+//original image.
+
+//Work through the seven steps to write this function. Work an example by hand and note the steps you took before
+//translating your algorithm to code. Which pixels should be part of the border? How will you identify those pixel?
+//Once you have identified them, how will you make them black?
+
+
+var img = new SimpleImage("smallpanda.png");
+print(img);
+
+function setBlack(pixel){
+    pixel.setRed(0);
+    pixel.setGreen(0);
+    pixel.setBlue(0);
+    return pixel
+}
+
+
+function addBorder(image, thickness){
+    var h = image.getHeight();
+    var w = image.getWidth();
+    for (var px of image.values()){
+        var x = px.getX();
+        var y = px.getY();
+        if (x <= thickness || y <= thickness){
+            setBlack(px);
+        }
+        if (x >= w - thickness || y >= h - thickness){
+            setBlack(px);
+        }
+    }
+    return image;
+}
+
+
+var picture = addBorder(img,10);
+print(picture);
+
+
