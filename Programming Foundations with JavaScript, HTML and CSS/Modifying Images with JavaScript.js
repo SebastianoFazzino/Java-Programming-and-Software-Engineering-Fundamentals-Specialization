@@ -1,5 +1,5 @@
 //Write a JavaScript program that modifies an image by putting three vertical stripes on it - a red stripe on the left one third, 
-a green stripe in the middle, and a blue stripe on the right one third. 
+//a green stripe in the middle, and a blue stripe on the right one third. 
 
 
 var img = new SimpleImage("hilton.jpg");
@@ -26,7 +26,7 @@ print(img);
 
 
 //Write a JavaScript function named swapRedGreen with one parameter pixel (representing a single pixel). This function should swap the red and green values of the pixel. 
-For example, if you have a pixel with red = 255, green = 100, blue = 150, after calling swapRedGreen on that pixel its new RGB values would be red = 100, green = 255, blue = 150.
+//For example, if you have a pixel with red = 255, green = 100, blue = 150, after calling swapRedGreen on that pixel its new RGB values would be red = 100, green = 255, blue = 150.
 
 
 var img = new SimpleImage('smallpanda.png');
