@@ -1,5 +1,5 @@
 //Write the green screen algorithm you saw in the lecture video yourself. To make sure you really understand the code that was written in the video, 
-you should write the code yourself without looking at the video unless you get stuck and need to refer back to it for a hint.
+//you should write the code yourself without looking at the video unless you get stuck and need to refer back to it for a hint.
 
 
 var OldImg = new SimpleImage("drewRobert.png");
