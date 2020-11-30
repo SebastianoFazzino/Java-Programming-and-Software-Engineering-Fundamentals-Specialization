@@ -9,7 +9,6 @@ For this assignment, you will add or modify several methods in the PerimeterAssi
 
 1. Complete writing the method getLargestPerimeterMultipleFiles that has no parameters. This method creates a DirectoryResource (so you can select multiple files) and then iterates over these files. 
 For each File f, it converts the file into a FileResource with the line
-
 FileResource fr = new FileResource(f);    
 
 Then it creates a Shape from the FileResource and calculates the shapes perimeter. What else does it need to do? It needs to return the the largest perimeter over all the shapes in the files you have selected.
