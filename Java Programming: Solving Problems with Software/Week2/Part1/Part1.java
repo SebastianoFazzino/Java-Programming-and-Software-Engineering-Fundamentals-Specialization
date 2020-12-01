@@ -19,7 +19,8 @@ public class Part1 {
         if (resultLength %  3 != 0) {
             result = "Invalid Gene Length";
         }
-        return result;
+        
+        return "DNA Gene Found: " + result;
       }
 
     public void testsFindSimpleGene() {
