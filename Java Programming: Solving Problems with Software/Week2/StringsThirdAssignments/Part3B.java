@@ -121,7 +121,7 @@ public class Part3B {
    }
    
    
-   public void testprocessGenes() {
+   public void testProcessGenes() {
        FileResource DNAStrand = new FileResource("brca1line.fa");
        String dna = DNAStrand.asString().toUpperCase();
        processGenes(dna);
@@ -130,6 +130,6 @@ public class Part3B {
   
    public static void main (String[] args) {
        Part3B test = new Part3B();
-       test.testprocessGenes();
+       test.testProcessGenes();
    }
 }
