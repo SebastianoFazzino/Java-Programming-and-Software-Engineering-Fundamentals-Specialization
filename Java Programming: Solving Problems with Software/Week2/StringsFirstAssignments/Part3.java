@@ -45,7 +45,7 @@ public class Part3 {
     public void testTwoOccurrencies() {
         String[] test1 = {"on", "Bourbon, Orleans, Downtown, Online, honor"};
         String[] test2 = {"it", "Italian, Spanish, Irish, city"};
-        String[] test3 = {"bee", "computer"};
+        String[] test3 = {"bee", "computer programming"};
         String[] test4 = {"an", "programming language"};
         
         boolean result1 = twoOccurrencies(test1[0], test1[1]);
