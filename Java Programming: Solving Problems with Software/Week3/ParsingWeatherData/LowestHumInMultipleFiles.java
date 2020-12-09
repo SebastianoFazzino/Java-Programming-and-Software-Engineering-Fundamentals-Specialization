@@ -1,4 +1,3 @@
-
 import edu.duke.*;
 import org.apache.commons.csv.*;
 import java.io.*;
@@ -30,16 +29,19 @@ public class LowestHumInMultipleFiles {
     
     public CSVRecord getLowestOfTwo(CSVRecord currentRow, CSVRecord lowestSoFar) {
         // This helper method is used to update the lowest humidity value
-        if (lowestSoFar == null && currentRow.get("Humidity") != "N/A") {
+        if (lowestSoFar == null) {
             lowestSoFar = currentRow;
         }
         else {
-            double currentHum = Double.parseDouble(currentRow.get("Humidity"));
-            double lowestHum = Double.parseDouble(lowestSoFar.get("Humidity"));   
-            if (currentHum < lowestHum) {
-                lowestSoFar = currentRow;
+            String humidity = currentRow.get("Humidity");
+            if (humidity.contains("N/A") == false) {
+                double currentHum = Double.parseDouble(humidity);
+                double lowestHum = Double.parseDouble(lowestSoFar.get("Humidity"));
+                if (currentHum < lowestHum) {
+                        lowestSoFar = currentRow;
+                }
             }
-        }  
+        }
         return lowestSoFar;
     }
     
