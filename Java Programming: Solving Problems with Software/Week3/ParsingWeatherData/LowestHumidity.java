@@ -3,7 +3,7 @@ import edu.duke.*;
 import org.apache.commons.csv.*;
 import java.io.*;
 
-public class lowestHumidity {
+public class LowestHumidity {
 
     public CSVRecord lowestHumidityInFile(CSVParser parser) {
         // This method finds the lowest humidity value in a given day
