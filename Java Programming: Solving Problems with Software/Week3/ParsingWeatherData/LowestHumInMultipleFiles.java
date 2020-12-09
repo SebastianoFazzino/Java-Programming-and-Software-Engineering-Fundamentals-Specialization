@@ -34,7 +34,7 @@ public class LowestHumInMultipleFiles {
         }
         else {
             String humidity = currentRow.get("Humidity");
-            if (humidity.contains("N/A") == false) {
+            if ( !humidity.contains("N/A") ) {
                 double currentHum = Double.parseDouble(humidity);
                 double lowestHum = Double.parseDouble(lowestSoFar.get("Humidity"));
                 if (currentHum < lowestHum) {
