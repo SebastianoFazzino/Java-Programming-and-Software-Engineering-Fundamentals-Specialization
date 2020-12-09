@@ -3,7 +3,7 @@ import edu.duke.*;
 import org.apache.commons.csv.*;
 import java.io.*;
 
-public class lowestHumInMultipleFiles {
+public class LowestHumInMultipleFiles {
     
     public CSVRecord lowestHumidityInManyFiles() {
         // This method finds the lowest humidity value given many file records
