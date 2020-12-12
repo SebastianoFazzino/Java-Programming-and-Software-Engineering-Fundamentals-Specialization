@@ -3,6 +3,10 @@ import edu.duke.*;
 
 public class WordLength {
     public void countWordLength(FileResource resource, int[] counts) {
+        /*
+         * This method takes a file resource and an int array as arguments, it compute the length of
+         * all the words in resource, storing these values in the array counts.
+         */
         for ( String word : resource.words() ) {
             int wordLength = word.length();
             if (!Character.isLetter(word.charAt(0))) {
@@ -20,6 +24,10 @@ public class WordLength {
     
     
     public int indexOfMax(int[] values) {
+        /*
+         * This method finds the most common word length, given an array of integers 
+         * representing word length in a given file
+         */
         int max = 0;
         for ( int i = 0; i < values.length; i++ ) {
             if (values[i] > max) {
@@ -31,6 +39,10 @@ public class WordLength {
     
     
     public void test() {
+        /*
+         * We create a new FileResource and an int array to pass as argument of countWordLength;
+         * we print out all the values in counts and then the most common word length
+         */
         FileResource test = new FileResource();
         int[] counts = new int[31];
         countWordLength(test, counts);
@@ -45,7 +57,7 @@ public class WordLength {
     
     
     public static void main(String[] args) {
-        WordLength test = new WordLength();
-        test.test();
+        WordLength wl = new WordLength();
+        wl.test();
     }
 }
