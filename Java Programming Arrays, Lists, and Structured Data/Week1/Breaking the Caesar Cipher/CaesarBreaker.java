@@ -96,11 +96,11 @@ public class CaesarBreaker {
         FileResource fr = new FileResource("test.txt");
         String message = fr.asString();
 
-        System.out.println(decryptTwoKeys("Ymnx rjxxflj nx ozxy f yjxy yt ijhwduy rjymti, ny htsyfnsx rfsd jjjjjjjx, xt ny'x jfxnjw yt ijhwnuy.  5"));
-        System.out.println(decryptTwoKeys("Bpqa umaaiom qa rcab i bmab bw lmkzgxb umbpwl, qb kwvbiqva uivg mmmmmmma, aw qb'a miaqmz bw lmkzqxb.  8"));
-        System.out.println(decryptTwoKeys("Guvf zrffntr vf whfg n grfg gb qrpelcg zrgubq, vg pbagnvaf znal rrrrrrrf, fb vg'f rnfvre gb qrpevcg.  13"));
-        System.out.println(decryptTwoKeys("Mabl fxlltzx bl cnlm t mxlm mh wxvkrim fxmahw, bm vhgmtbgl ftgr xxxxxxxl, lh bm'l xtlbxk mh wxvkbim.  19"));
-        System.out.println(decryptTwoKeys("Qefp jbppxdb fp grpq x qbpq ql abzovmq jbqela, fq zlkqxfkp jxkv bbbbbbbp, pl fq'p bxpfbo ql abzofmq.  23"));
+        System.out.println(decrypt("Ymnx rjxxflj nx ozxy f yjxy yt ijhwduy rjymti, ny htsyfnsx rfsd jjjjjjjx, xt ny'x jfxnjw yt ijhwnuy.  5"));
+        System.out.println(decrypt("Bpqa umaaiom qa rcab i bmab bw lmkzgxb umbpwl, qb kwvbiqva uivg mmmmmmma, aw qb'a miaqmz bw lmkzqxb.  8"));
+        System.out.println(decrypt("Guvf zrffntr vf whfg n grfg gb qrpelcg zrgubq, vg pbagnvaf znal rrrrrrrf, fb vg'f rnfvre gb qrpevcg.  13"));
+        System.out.println(decrypt("Mabl fxlltzx bl cnlm t mxlm mh wxvkrim fxmahw, bm vhgmtbgl ftgr xxxxxxxl, lh bm'l xtlbxk mh wxvkbim.  19"));
+        System.out.println(decrypt("Qefp jbppxdb fp grpq x qbpq ql abzovmq jbqela, fq zlkqxfkp jxkv bbbbbbbp, pl fq'p bxpfbo ql abzofmq.  23"));
         
         System.out.println(decryptTwoKeys("Gwpv c vbuq pvokki yfve iqqu qc bgbgbgbgbgbgbgbgbu"));
         System.out.println(decryptTwoKeys("Bcqn hmnavoz da rpao v omnb bj ymxztxo hmopjl, db kjvoidvn hiig mzmzmzmzmzmzmn, aj db'a mvadmm ow lzkmqkb"));
