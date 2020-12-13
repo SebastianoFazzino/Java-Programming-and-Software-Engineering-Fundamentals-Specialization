@@ -49,11 +49,11 @@ public class CaesarBreaker {
     }
     
      
-    public int indexOfMax(int[] vals){
+    public int indexOfMax(int[] counts){
         // This helper method given an integer array, returns the index with the highest value
         int maxIndex = 0;
-        for(int i=0; i < vals.length; i++){
-            if (vals[i] > vals[maxIndex]){
+        for(int i=0; i < counts.length; i++){
+            if (counts[i] > counts[maxIndex]){
                 maxIndex = i;
             }
         }
