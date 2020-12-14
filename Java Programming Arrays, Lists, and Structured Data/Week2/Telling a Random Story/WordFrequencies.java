@@ -36,15 +36,18 @@ public class WordFrequencies {
         }
     }
 
+    
     public int indexOfMax() {
         // This method finds the word that occurs the most and returns its index
-        int max = 0;
+        int index = -1;
+        int occurrences = 0;
         for (int i = 0; i < myFrequencies.size(); i++) {
-            if ( myFrequencies.get(i) > max ) {
-                max = myFrequencies.indexOf(i);;
+            if ( myFrequencies.get(i) > occurences ) {
+                index = i;
+                occurrences = myFrequencies.get(i);
             }
         }
-        return max;
+        return index;
     }
 
 
