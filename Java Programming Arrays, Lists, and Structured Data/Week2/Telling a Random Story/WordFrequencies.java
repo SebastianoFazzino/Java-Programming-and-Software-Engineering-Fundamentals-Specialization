@@ -1,5 +1,6 @@
 import edu.duke.*;
 import java.util.ArrayList;
+
 public class WordFrequencies {
     private ArrayList<String> myWords;
     private ArrayList<Integer> myFrequencies;
