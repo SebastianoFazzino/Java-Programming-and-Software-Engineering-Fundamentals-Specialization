@@ -47,3 +47,4 @@ public class WordFrequencies {
         wf.tester();
     }
 }
+
