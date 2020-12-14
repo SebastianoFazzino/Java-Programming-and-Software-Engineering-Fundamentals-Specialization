@@ -17,6 +17,8 @@ public class WordFrequencies {
     public void findUnique() {
         // We create a new FileResource to select a file to analyze
         FileResource resource = new FileResource();
+        myWords.clear();
+        myFrequencies.clear();
         // .words() is used to split all the words in a given file
         for (String s : resource.words()) {
             s = s.toLowerCase();
@@ -34,6 +36,18 @@ public class WordFrequencies {
         }
     }
 
+    public int indexOfMax() {
+        // This method finds the word that occurs the most and returns its index
+        int max = 0;
+        for (int i = 0; i < myFrequencies.size(); i++) {
+            if ( myFrequencies.get(i) > max ) {
+                max = myFrequencies.indexOf(i);;
+            }
+        }
+        return max;
+    }
+
+
     public void tester() {
         // We print out all the unique words and their occurrences
         findUnique();
@@ -41,6 +55,8 @@ public class WordFrequencies {
         for (int i = 0; i < myWords.size(); i++ ) {
             System.out.println(myFrequencies.get(i) + "\t" + myWords.get(i));
         }
+        // We print out the word that occurs the most and its number of occurrences
+        System.out.println("The word that occurs the most is: " + myWords.get(indexOfMax()) + " and its count is " + myFrequencies.get(indexOfMax()));
     }
 
     public static void main(String[] args) {
@@ -48,4 +64,3 @@ public class WordFrequencies {
         wf.tester();
     }
 }
-
