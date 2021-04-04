@@ -8,12 +8,12 @@ public class MovieRunnerWithFilters {
         moviesShort = "data/ratedmovies_short.csv";
         ratersFull = "data/ratings.csv";
         ratersShort = "data/ratings_short.csv";
-    }
+        MovieDatabase.initialize(moviesFull);
+   }
 
     public void testingThirdRating(){
-        ThirdRating tr = new ThirdRating(moviesShort);
+        ThirdRating tr = new ThirdRating();
         //System.out.println(tr.getRaterSize());
-        MovieDatabase.initialize(moviesShort);
         System.out.println("Read data for " + MovieDatabase.size() + " movies");
         System.out.println("Read data for " + tr.getSize() + " raters");
         ArrayList<Rating> ratings = tr.getAverageRatings(1);
@@ -26,8 +26,7 @@ public class MovieRunnerWithFilters {
     }
 
     public void printAverageRatingsByYear(){
-        ThirdRating tr = new ThirdRating(ratersShort);
-        MovieDatabase.initialize(moviesShort);
+        ThirdRating tr = new ThirdRating();
         Filter yearFilter = new YearAfterFilter(2000);
         System.out.println("Read data for " + MovieDatabase.size() + " movies");
         System.out.println("Read data for " + tr.getSize() + " raters");
@@ -42,8 +41,7 @@ public class MovieRunnerWithFilters {
     }
 
     public void printAverageRatingsByGenre(){
-        ThirdRating tr = new ThirdRating(ratersShort);
-        MovieDatabase.initialize(moviesShort);
+        ThirdRating tr = new ThirdRating();
         Filter genreFilter = new GenreFilter("Crime");
         System.out.println("Read data for " + MovieDatabase.size() + " movies");
         System.out.println("Read data for " + tr.getSize() + " raters");
@@ -58,8 +56,7 @@ public class MovieRunnerWithFilters {
     }
 
     public void printAverageRatingsByMinutes(){
-        ThirdRating tr = new ThirdRating(ratersShort);
-        MovieDatabase.initialize(moviesShort);
+        ThirdRating tr = new ThirdRating();
         Filter minutesFilter = new MinutesFilter(110, 170);
         System.out.println("Read data for " + MovieDatabase.size() + " movies");
         System.out.println("Read data for " + tr.getSize() + " raters");
@@ -74,8 +71,7 @@ public class MovieRunnerWithFilters {
     }
 
     public void printAverageRatingsByDirectors(){
-        ThirdRating tr = new ThirdRating(ratersShort);
-        MovieDatabase.initialize(moviesShort);
+        ThirdRating tr = new ThirdRating();
         Filter directorsFilter = new DirectorsFilter("Charles Chaplin,Michael Mann,Spike Jonze");
         System.out.println("Read data for " + MovieDatabase.size() + " movies");
         System.out.println("Read data for " + tr.getSize() + " raters");
@@ -90,8 +86,7 @@ public class MovieRunnerWithFilters {
     }
 
     public void printAverageRatingsByYearAfterAndGenre(){
-        ThirdRating tr = new ThirdRating(ratersShort);
-        MovieDatabase.initialize(moviesShort);
+        ThirdRating tr = new ThirdRating();
         Filter yearFilter = new YearAfterFilter(1980);
         Filter genreFilter = new GenreFilter("Romance");
         AllFilters multipleFilter = new AllFilters();
@@ -111,8 +106,7 @@ public class MovieRunnerWithFilters {
     }
 
     public void printAverageRatingsByDirectorsAndMinutes(){
-        ThirdRating tr = new ThirdRating(ratersFull);
-        MovieDatabase.initialize(moviesFull);
+        ThirdRating tr = new ThirdRating();
         Filter minutesFilter = new MinutesFilter(30, 170);
         Filter directorsFilter = new DirectorsFilter("Spike Jonze,Michael Mann,Charles Chaplin,Francis Ford Coppola");
         AllFilters multipleFilter = new AllFilters();
