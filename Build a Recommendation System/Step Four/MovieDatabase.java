@@ -1,28 +1,20 @@
-import java.util.*;
-import org.apache.commons.csv.*;
-import edu.duke.FileResource;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MovieDatabase {
     private static HashMap<String, Movie> ourMovies;
+    private static final String MOVIES_FULL = "data/ratedmoviesfull.csv";
 
-    public static void initialize(String moviefile) {
+    public static void initialize() {
         if (ourMovies == null) {
-            ourMovies = new HashMap<String,Movie>();
-            loadMovies(moviefile);
-        }
-    }
-
-    private static void initialize() {
-        if (ourMovies == null) {
-            ourMovies = new HashMap<String,Movie>();
-            loadMovies("data/ratedmoviesfull.csv");
+            ourMovies = new HashMap<>();
+            loadMovies();
         }
     }	
 
-	
-    private static void loadMovies(String filename) {
+    private static void loadMovies() {
         FirstRating fr = new FirstRating();
-        ArrayList<Movie> list = fr.loadMovies(filename);
+        ArrayList<Movie> list = fr.loadMovies(MOVIES_FULL);
         for (Movie m : list) {
             ourMovies.put(m.getID(), m);
         }
@@ -79,7 +71,7 @@ public class MovieDatabase {
 
     public static ArrayList<String> filterBy(Filter f) {
         initialize();
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         for(String id : ourMovies.keySet()) {
             if (f.satisfies(id)) {
                 list.add(id);
