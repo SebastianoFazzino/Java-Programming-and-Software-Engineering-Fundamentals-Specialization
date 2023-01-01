@@ -66,6 +66,7 @@ public class MovieDatabase {
     }
 
     public static int size() {
+        initialize();
         return ourMovies.size();
     }
 

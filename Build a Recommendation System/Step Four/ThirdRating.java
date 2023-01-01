@@ -59,7 +59,7 @@ public class ThirdRating {
                 Rating rating = new Rating(movie, avgRating);
                 ratings.add(rating);
             }
-            ratings = sorter(ratings);
+            ratings = this.sorter(ratings);
         }
         return ratings;
     }
