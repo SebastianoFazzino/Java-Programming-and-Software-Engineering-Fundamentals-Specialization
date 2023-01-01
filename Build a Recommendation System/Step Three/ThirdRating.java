@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 public class ThirdRating {
     private ArrayList<Rater> myRaters;
@@ -8,13 +7,7 @@ public class ThirdRating {
     public ThirdRating() {
         myRaters = new ArrayList<>();
         FirstRating fr = new FirstRating();
-        myRaters = fr.loadRaters("data/ratings.csv");
-    }
-
-    public ThirdRating(String ratingfile) {
-        myRaters = new ArrayList<>();
-        FirstRating fr = new FirstRating();
-        myRaters = fr.loadRaters(ratingfile);
+        myRaters = fr.loadRaters(FirstRating.RATINGS_FULL);
     }
 
     public int getRaterSize(){
@@ -43,11 +36,11 @@ public class ThirdRating {
         return out;
     }
 
-    public ArrayList<Rating> getAverageRatingsByFilter(int minimalRaters, Filter filterCriteria){
+    public ArrayList<Rating> getAverageRatingsByFilter(int minimumRaters, Filter filterCriteria){
         ArrayList<Rating> ratings = new ArrayList<>();
         ArrayList<String> myMovies = MovieDatabase.filterBy(filterCriteria);
         for (String movie : myMovies){
-            double avgRating = getAverageByID(movie, minimalRaters);
+            double avgRating = getAverageByID(movie, minimumRaters);
             if (avgRating != 0.0) {
                 Rating rating = new Rating(movie, avgRating);
                 ratings.add(rating);
@@ -56,17 +49,17 @@ public class ThirdRating {
         return ratings;
     }
 
-    public ArrayList<Rating> getAverageRatings (int minimalRaters) {
+    public ArrayList<Rating> getAverageRatings (int minimumRaters) {
         ArrayList<Rating> ratings = new ArrayList<Rating>();
         ArrayList<String> myMovies = MovieDatabase.filterBy(new TrueFilter());
 
         for (String movie : myMovies) {
-            double avgRating = getAverageByID(movie, minimalRaters);
+            double avgRating = getAverageByID(movie, minimumRaters);
             if (avgRating != 0.0) {
                 Rating rating = new Rating(movie, avgRating);
                 ratings.add(rating);
             }
-            //ratings = sorter(ratings);
+            ratings = sorter(ratings);
         }
         return ratings;
     }

@@ -7,7 +7,7 @@ public class EfficientRater implements Rater {
 
     public EfficientRater(String id) {
         myID = id;
-        myRatings = new HashMap<String,Rating>();
+        myRatings = new HashMap<>();
     }
 
     public void addRating(String item, double rating) {

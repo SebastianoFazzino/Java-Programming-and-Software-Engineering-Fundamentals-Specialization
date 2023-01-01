@@ -1,20 +1,14 @@
 import java.util.*;
 
 public class SecondRating {
-    private ArrayList<Movie> myMovies;
-    private ArrayList<Rater> myRaters;
-    private HashMap<String,Integer> myMap;
+    private final ArrayList<Movie> myMovies;
+    private final ArrayList<Rater> myRaters;
+
 
     public SecondRating() {
-        myMovies = new ArrayList<>();
-        myRaters = new ArrayList<>();
-        myMap = new HashMap<>();
-    }
-
-    public SecondRating(String moviefile, String ratingfile) {
         FirstRating fr = new FirstRating();
-        myMovies = fr.loadMovies(moviefile);
-        myRaters = fr.loadRaters(ratingfile);
+        myMovies = fr.loadMovies(FirstRating.MOVIES_FULL);
+        myRaters = fr.loadRaters(FirstRating.RATINGS_FULL);
     }
 
     public int getMovieSize(){
@@ -28,12 +22,12 @@ public class SecondRating {
     private double getAverageByID(String ID, int minimalRaters){
         double avgRating = 0.0;
         int howMany = 0;
-        for (int i = 0; i < myRaters.size(); i++) {
-            ArrayList<String> movieID = myRaters.get(i).getItemsRated();
+        for (Rater myRater : myRaters) {
+            ArrayList<String> movieID = myRater.getItemsRated();
             for (String s : movieID) {
                 if (s.equals(ID)) {
                     howMany += 1;
-                    double rate = myRaters.get(i).getRating(ID);
+                    double rate = myRater.getRating(ID);
                     avgRating += rate;
                 }
             }
@@ -46,8 +40,8 @@ public class SecondRating {
     }
 
     private boolean containsID(ArrayList<Rating> rating, String movieID){
-        for (int i = 0; i < rating.size(); i++) {
-            if (rating.get(i).getItem().equals(movieID)){
+        for (Rating value : rating) {
+            if (value.getItem().equals(movieID)) {
                 return true;
             }
         }
@@ -60,38 +54,37 @@ public class SecondRating {
         return out;
     }
 
-    public ArrayList<Rating> getAverageRatings(int mininmalRaters){
+    public ArrayList<Rating> getAverageRatings(int minimumRatings){
         ArrayList<Rating> rating = new ArrayList<>();
-        for (int i = 0; i < myRaters.size(); i++) {
-            ArrayList<String> list = myRaters.get(i).getItemsRated();
-            for (String movieID : list){
-                double rate = getAverageByID(movieID, mininmalRaters);
-                if (rate != 0.0 && !containsID(rating, movieID)) {
+        for (Rater myRater : myRaters) {
+            ArrayList<String> list = myRater.getItemsRated();
+            for (String movieID : list) {
+                double rate = this.getAverageByID(movieID, minimumRatings);
+                if (rate != 0.0 && !this.containsID(rating, movieID)) {
                     Rating current = new Rating(movieID, rate);
                     rating.add(current);
                 }
             }
         }
-        rating = sorter(rating);
-        //System.out.println(rating.size());
+        rating = this.sorter(rating);
         return rating;
     }
 
     public String getTitle(String ID){
-        for (int i = 0; i < myMovies.size(); i++) {
-            String movieID = myMovies.get(i).getID();
+        for (Movie myMovie : myMovies) {
+            String movieID = myMovie.getID();
             if (movieID.equals(ID)) {
-                return myMovies.get(i).getTitle();
+                return myMovie.getTitle();
             }
         }
        return "Movie ID not found";
     }
 
     public String getID(String movie){
-        for (int i = 0; i < myMovies.size(); i++) {
-            String title = myMovies.get(i).getTitle();
-            if (title.equals(movie)){
-                return myMovies.get(i).getID();
+        for (Movie myMovie : myMovies) {
+            String title = myMovie.getTitle();
+            if (title.equals(movie)) {
+                return myMovie.getID();
             }
         }
         return "No such title";

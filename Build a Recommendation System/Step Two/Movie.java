@@ -12,6 +12,40 @@ public class Movie {
     private String poster;
     private int minutes;
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public void setGenres(String genres) {
+        this.genres = genres;
+    }
+
+    public void setDirector(String director) {
+        this.director = director;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public void setMinutes(int minutes) {
+        this.minutes = minutes;
+    }
+
+    public Movie() {}
+
     public Movie (String anID, String aTitle, String aYear, String theGenres) {
         // just in case data file contains extra whitespace
         id = anID.trim();
@@ -21,7 +55,7 @@ public class Movie {
     }
 
     public Movie (String anID, String aTitle, String aYear, String theGenres, String aDirector,
-    String aCountry, String aPoster, int theMinutes) {
+                  String aCountry, String aPoster, int theMinutes) {
         // just in case data file contains extra whitespace
         id = anID.trim();
         title = aTitle.trim();

@@ -3,27 +3,25 @@ import java.util.HashMap;
 
 public class MovieRunnerAverage {
 
-    public void printAverageRatings(){
-        SecondRating sr = new SecondRating("data/ratedmoviesfull.csv", "data/ratings_short.csv");
-        System.out.println("Number of movies: " + sr.getMovieSize() +
-                "\nNumber of raters: " + sr.getRaterSize());
-        /*System.out.println(sr.getAverageRatings(3));
-        System.out.println(sr.getTitle("2726560"));*/
-        ArrayList<Rating> ratings = sr.getAverageRatings(3);
+    public void printAverageRatings(int minimumRatings){
+
+        SecondRating sr = new SecondRating();
+
+        ArrayList<Rating> ratings = sr.getAverageRatings(minimumRatings);
         for (int i = 0; i < ratings.size(); i++) {
             String title = sr.getTitle(ratings.get(i).getItem());
             System.out.println("Rating: " + ratings.get(i).getValue() + " Title: " + title);
         }
     }
 
-    public void getAverageRatingOneMovie(){
-        SecondRating sr = new SecondRating("data/ratedmoviesfull.csv", "data/ratings_short.csv");
-        String title = "The Godfather";
-        String movieID = sr.getID(title);
+    public void getAverageRatingOneMovie(String movieTitle){
+
+        SecondRating sr = new SecondRating();
+        String movieID = sr.getID(movieTitle);
         ArrayList<Rating> ratings = sr.getAverageRatings(3);
         for (int i = 0; i < ratings.size(); i++) {
             if (ratings.get(i).getItem().equals(movieID)) {
-                System.out.println("Rating: " + ratings.get(i).getValue() + " Title: " + title);
+                System.out.println("Rating: " + ratings.get(i).getValue() + " Title: " + movieTitle);
             }
         }
     }
@@ -31,8 +29,8 @@ public class MovieRunnerAverage {
 
     public static void main(String[] args) {
         MovieRunnerAverage mra = new MovieRunnerAverage();
-        //mra.printAverageRatings();
-        mra.getAverageRatingOneMovie();
+        mra.printAverageRatings(12);
+//        mra.getAverageRatingOneMovie("Vacation");
     }
 }
 
