@@ -2,55 +2,80 @@ import java.util.ArrayList;
 
 public class MovieRunnerSimilarRatings {
 
-    public void printAverageRatings(int minimumRaters){
-        FourthRating fr = new FourthRating();
+    public void printSimilarRatings(
+            String raterId, int numSimilarRaters, int numMinimumRaters) {
 
-        System.out.println("Read data for " + MovieDatabase.size() + " movies");
-        System.out.println("Read data for " + RaterDatabase.size() + " raters");
-        ArrayList<Rating> ratings = fr.getAverageRatings(minimumRaters);
-        System.out.println("Found " + ratings.size() + " movies");
-        for (int i = 0; i < ratings.size(); i++) {
-            double rate = ratings.get(i).getValue();
-            String movie = MovieDatabase.getTitle(ratings.get(i).getItem());
-            System.out.println(rate + " \"" + movie + "\"");
-        }
+        FourthRating fr = new FourthRating();
+        ArrayList<Rating> similarRatings = fr.getSimilarRatings(raterId, numSimilarRaters, numMinimumRaters);
+
+        similarRatings.forEach(rating ->
+                System.out.println("Movie: " + MovieDatabase.getTitle(rating.getItem())
+                        + " Rating: " + rating.getValue()));
     }
 
-    public void printAverageRatingsByYearAfterAndGenre(int yearAfter, String genre, int minimumRaters){
+    public void printSimilarRatingsByGenre(
+            String raterId, int numSimilarRaters, int numMinimumRaters, GenreFilter filter) {
+
         FourthRating fr = new FourthRating();
-        Filter yearFilter = new YearAfterFilter(yearAfter);
+        ArrayList<Rating> similarRatings = fr.getSimilarRatingsByFilter(raterId, numSimilarRaters, numMinimumRaters, filter);
+
+        similarRatings.forEach(rating ->
+                System.out.println("Movie: " + MovieDatabase.getTitle(rating.getItem())
+                        + " Rating: " + rating.getValue()));
+    }
+
+    public void printSimilarRatingsByDirector(
+            String raterId, int numSimilarRaters, int numMinimumRaters, DirectorsFilter filter) {
+
+        FourthRating fr = new FourthRating();
+        ArrayList<Rating> similarRatings = fr.getSimilarRatingsByFilter(raterId, numSimilarRaters, numMinimumRaters, filter);
+
+        similarRatings.forEach(rating ->
+                System.out.println("Movie: " + MovieDatabase.getTitle(rating.getItem())
+                        + " Rating: " + rating.getValue()));
+    }
+
+    public void printSimilarRatingsByGenreAndMinutes(
+            String raterId, int numSimilarRaters, int numMinimumRaters, String genre, int minLength, int maxLength) {
+
         Filter genreFilter = new GenreFilter(genre);
+        Filter lenghtFilter = new MinutesFilter(minLength, maxLength);
         AllFilters multipleFilter = new AllFilters();
-        multipleFilter.addFilter(yearFilter);
+        multipleFilter.addFilter(lenghtFilter);
         multipleFilter.addFilter(genreFilter);
-        System.out.println("Read data for " + MovieDatabase.size() + " movies");
-        System.out.println("Read data for " + RaterDatabase.size() + " raters");
-        ArrayList<Rating> ratings = fr.getAverageRatingsByFilter(minimumRaters, multipleFilter);
-        System.out.println("Found " + ratings.size() + " movies of genre " + genre + " released after " + yearAfter);
-        for (int i = 0; i < ratings.size(); i++) {
-            double rate = ratings.get(i).getValue();
-            String movie = MovieDatabase.getTitle(ratings.get(i).getItem());
-            String genres = MovieDatabase.getGenres(ratings.get(i).getItem());
-            int year = MovieDatabase.getYear(ratings.get(i).getItem());
-            System.out.println(rate + " " + year + " \""  + movie + "\"\n" + genres);
-        }
-    }
-
-    public void printSimilarRatings(String raterId, int numSimilarRaters, int minimumRaters) {
 
         FourthRating fr = new FourthRating();
-        ArrayList<String> movies = MovieDatabase.filterBy(new TrueFilter());
-        ArrayList<Rater> ratings = RaterDatabase.getRaters();
+        ArrayList<Rating> similarRatings = fr.getSimilarRatingsByFilter(raterId, numSimilarRaters, numMinimumRaters, multipleFilter);
 
-        ArrayList<Rating> similarRatings = fr.getSimilarRatings(raterId, numSimilarRaters, minimumRaters);
+        similarRatings.forEach(rating ->
+                System.out.println("Movie: " + MovieDatabase.getTitle(rating.getItem())
+                        + " Rating: " + rating.getValue()));
+    }
 
-        System.out.println("Top rated movie is " + MovieDatabase.getTitle(similarRatings.get(0).getItem()));
+    public void printSimilarRatingsByYearAfterAndMinutes(
+            String raterId, int numSimilarRaters, int numMinimumRaters, int yearAfter, int minLength, int maxLength) {
+
+        Filter yearFilter = new YearAfterFilter(yearAfter);
+        Filter lenghtFilter = new MinutesFilter(minLength, maxLength);
+        AllFilters multipleFilter = new AllFilters();
+        multipleFilter.addFilter(lenghtFilter);
+        multipleFilter.addFilter(yearFilter);
+
+        FourthRating fr = new FourthRating();
+        ArrayList<Rating> similarRatings = fr.getSimilarRatingsByFilter(raterId, numSimilarRaters, numMinimumRaters, multipleFilter);
+
+        similarRatings.forEach(rating ->
+                System.out.println("Movie: " + MovieDatabase.getTitle(rating.getItem())
+                        + " Rating: " + rating.getValue()));
     }
 
     public static void main(String[] args) {
         MovieRunnerSimilarRatings mr = new MovieRunnerSimilarRatings();
 
-//        mr.printAverageRatings(20);
-        mr.printSimilarRatings("65", 5, 20);
+        mr.printSimilarRatings("71", 20, 5);
+        mr.printSimilarRatingsByGenre("964", 20, 5, new GenreFilter("Mystery"));
+        mr.printSimilarRatingsByDirector("120", 10, 2, new DirectorsFilter("Clint Eastwood,J.J. Abrams,Alfred Hitchcock,Sydney Pollack,David Cronenberg,Oliver Stone,Mike Leigh"));
+        mr.printSimilarRatingsByGenreAndMinutes("168", 10, 3, "Drama", 80, 160);
+        mr.printSimilarRatingsByYearAfterAndMinutes("314", 10, 5, 1975, 70, 200);
     }
 }
