@@ -70,7 +70,7 @@ public class RecommendationRunner implements Recommender {
                                     "    <td>%s</td>\n" +
                                     "    <td>%s</td>\n" +
                                     "    <td>%s</td>\n" +
-                                    "    <td><img src=%s /></td>\n" +
+                                    "    <td><img src=\"%s\" /></td>\n" +
                                     "  </tr>",
                             movie.getTitle(), movie.getGenres(), movie.getDirector(),
                             movie.getMinutes(), movie.getPoster()
