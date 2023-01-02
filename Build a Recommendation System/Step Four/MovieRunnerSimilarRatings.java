@@ -77,5 +77,6 @@ public class MovieRunnerSimilarRatings {
         mr.printSimilarRatingsByDirector("120", 10, 2, new DirectorsFilter("Clint Eastwood,J.J. Abrams,Alfred Hitchcock,Sydney Pollack,David Cronenberg,Oliver Stone,Mike Leigh"));
         mr.printSimilarRatingsByGenreAndMinutes("168", 10, 3, "Drama", 80, 160);
         mr.printSimilarRatingsByYearAfterAndMinutes("314", 10, 5, 1975, 70, 200);
+
     }
 }
