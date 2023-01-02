@@ -1,13 +1,14 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 public class FourthRating {
 
     private double getAverageByID(String id, int minimalRaters){
         double avgRating  = 0.0;
         int howMany = 0;
-        for(Rater rater: RaterDatabase.getRaters()) {
-            if(rater.hasRating(id)) {
+        for (Rater rater: RaterDatabase.getRaters()) {
+            if (rater.hasRating(id)) {
                 avgRating += rater.getRating(id);
                 howMany += 1;
             }
@@ -20,7 +21,7 @@ public class FourthRating {
     }
 
     public ArrayList<Rating> getAverageRatings (int minimumRaters) {
-        ArrayList<Rating> ratings = new ArrayList<Rating>();
+        ArrayList<Rating> ratings = new ArrayList<>();
         ArrayList<String> myMovies = MovieDatabase.filterBy(new TrueFilter());
 
         for (String movie : myMovies) {
@@ -53,40 +54,54 @@ public class FourthRating {
         ArrayList<Rating> similarities =  getSimilarities(raterId);
         ArrayList<Rating> similarRaters =  new ArrayList<>();
 
-        for (int i = 0; i < numSimilarRaters; i++) {
+        for (int i = 0; i < minimumRaters; i++) {
             similarRaters.add(similarities.get(i));
         }
 
         ArrayList<String> movies = MovieDatabase.filterBy(new TrueFilter());
 
         for (String movie : movies) {
-            double avg = this.calculateAvg(movie, similarRaters, minimumRaters);
+
+            double avg = this.calculateWeightAvg(movie, similarRaters, minimumRaters);
+
             if (avg > 0){
                 Rating rating = new Rating(movie, avg);
                 ratings.add(rating);
             }
         }
 
-        Collections.sort(ratings, Collections.reverseOrder());
+        ratings.sort(Collections.reverseOrder());
         return ratings;
     }
 
-    private double calculateAvg(String movieId, ArrayList<Rating> similarRaters, int minimalRaters){
-        int count = 0;
-        double totalRatings = 0.0;
-        for(Rating rating : similarRaters){
-            Rater curr = RaterDatabase.getRater(rating.getItem());
-            double rate = curr.getRating(movieId);
-            if(rate != -1){
-                count++;
-                totalRatings = totalRatings + rate*rating.getValue();
+    public ArrayList<Rating> getSimilarRatingsByFilter(
+            String raterId, int numSimilarRaters, int minimumRaters, Filter filterCriteria
+    ) {
+
+        ArrayList<Rating> ratings = new ArrayList<>();
+        ArrayList<Rating> similarities =  getSimilarities(raterId);
+        ArrayList<Rating> similarRaters =  new ArrayList<>();
+
+        for (int i = 0; i < numSimilarRaters; i++) {
+            similarRaters.add(similarities.get(i));
+        }
+
+        ArrayList<String> movies = MovieDatabase.filterBy(filterCriteria);
+
+        for (String movie : movies) {
+
+            double avg = this.calculateWeightAvg(movie, similarRaters, minimumRaters);
+
+            if (avg > 0){
+                Rating rating = new Rating(movie, avg);
+                ratings.add(rating);
             }
         }
-        if(count>=minimalRaters){
-            return totalRatings/count;
-        }
-        return 0.0;
+
+        ratings.sort(Collections.reverseOrder());
+        return ratings;
     }
+
 
     private ArrayList<Rating> getSimilarities(String raterId) {
 
@@ -105,7 +120,7 @@ public class FourthRating {
                 similarities.add(rating);
             }
         }
-        Collections.sort(similarities, Collections.reverseOrder());
+        similarities.sort(Collections.reverseOrder());
         return similarities;
     }
 
@@ -125,6 +140,30 @@ public class FourthRating {
             }
         }
         return dotProduct;
+    }
+
+    private double calculateWeightAvg(String movieId, ArrayList<Rating> similarRaters, int minimalRaters){
+
+        int count = 0;
+        double totalRatings = 0.0;
+
+        for (Rating rating : similarRaters) {
+
+            Rater current = RaterDatabase.getRater(rating.getItem());
+
+            try {
+
+                double rate = current.getRating(movieId);
+
+                if (rate != -1) {
+                    totalRatings = totalRatings + rate * rating.getValue();
+                    count++;
+                }
+            } catch (Exception ignore) {}
+
+        }
+
+        return count >= minimalRaters ? totalRatings / count : 0.0;
     }
 
 }
