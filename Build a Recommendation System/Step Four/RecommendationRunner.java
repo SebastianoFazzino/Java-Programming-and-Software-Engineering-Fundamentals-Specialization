@@ -33,7 +33,7 @@ public class RecommendationRunner implements Recommender {
             ArrayList<Rating> recommendations = fourthRating.getSimilarRatings(webRaterID, 20, 5);
 
             if (recommendations.size() < 5) {
-                System.out.println("<h2 style=\"color: red;\">Ops! We couldn't find any recommendation for you this time, come back later</h2>");
+                System.out.println("<h2>Ops! We couldn't find any recommendation for you this time, come back later</h2>");
 
             } else {
 
